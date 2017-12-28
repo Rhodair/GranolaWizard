@@ -33,6 +33,14 @@ namespace GranolaWizard
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services
+                .AddAuthentication()
+                .AddFacebook(options =>
+                {
+                    options.AppId = Configuration["Facebook:AppId"];
+                    options.AppSecret = Configuration["Facebook:AppSecret"];
+                });
+
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
             //services.AddScoped<ITodoItemService, FakeTodoItemService>();

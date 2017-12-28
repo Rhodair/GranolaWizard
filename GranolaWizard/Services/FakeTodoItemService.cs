@@ -8,7 +8,7 @@ namespace GranolaWizard.Services
 {
     public class FakeTodoItemService : ITodoItemService
     {
-        public Task<IEnumerable<TodoItem>> GetIncompleteItemsAsync()
+        public Task<IEnumerable<TodoItem>> GetIncompleteItemsAsync(ApplicationUser user)
         {
             // Return an array of TodoItems
             IEnumerable<TodoItem> items = new[]
@@ -26,6 +26,16 @@ namespace GranolaWizard.Services
             };
 
             return Task.FromResult(items);
+        }
+        
+        public async Task<bool> AddItemAsync(TodoItem newItem, ApplicationUser user)
+        {
+            return await Task.FromResult(true);
+        }
+        
+        public async Task<bool> MarkDoneAsync(Guid id, ApplicationUser user)
+        {
+            return await Task.FromResult(true);
         }
     }
 }
