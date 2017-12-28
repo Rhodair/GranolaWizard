@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace GranolaWizard.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = Constants.AdministratorRole)]
     public class ManageUsersController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public ManageUsersController(UserManager<ApplicationUser>userManager)
+        public ManageUsersController(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
         }
@@ -23,14 +23,17 @@ namespace GranolaWizard.Controllers
         public async Task<IActionResult> Index()
         {
             var admins = await _userManager
-                .GetUsersInRoleAsync("Administrator");
+                .GetUsersInRoleAsync(Constants.AdministratorRole);
+
             var everyone = await _userManager.Users
                 .ToArrayAsync();
+
             var model = new ManageUsersViewModel
             {
                 Administrators = admins,
                 Everyone = everyone
             };
+
             return View(model);
         }
     }

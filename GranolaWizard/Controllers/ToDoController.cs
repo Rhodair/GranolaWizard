@@ -18,8 +18,9 @@ namespace GranolaWizard.Controllers
         private readonly ITodoItemService _todoItemService;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public TodoController(ITodoItemService todoItemService,
-        UserManager<ApplicationUser> userManager)
+        public TodoController(
+            ITodoItemService todoItemService,
+            UserManager<ApplicationUser> userManager)
         {
             _todoItemService = todoItemService;
             _userManager = userManager;
@@ -51,7 +52,7 @@ namespace GranolaWizard.Controllers
             if (currentUser == null) { return Unauthorized(); }
             var successful = await _todoItemService.AddItemAsync(newItem, currentUser);
             if (!successful) { return BadRequest(new { error = "Could not add item." }); }
-            return Ok();
+            return Ok();
         }
 
         public async Task<IActionResult> MarkDone(Guid id)
