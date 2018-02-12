@@ -33,8 +33,7 @@ namespace GranolaWizard
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services
-                .AddAuthentication()
+            services.AddAuthentication()
                 .AddFacebook(options =>
                 {
                     options.AppId = Configuration["Facebook:AppId"];
